@@ -1,0 +1,85 @@
+자바에서 미리 정의해둔 함수 인터페이스를 사용해보자. 
+
+Java가 기본으로 제공하는 함수형 인터페이스
+
+● java.lang.funcation 패키지
+● 자바에서 미리 정의해둔 자주 사용할만한 함수 인터페이스
+● Function<T, R>  
+● BiFunction<T, U, R>
+● Consumer<T>
+● Supplier<T>
+● Predicate<T>
+● UnaryOperator<T>
+● BinaryOperator<T>
+
+
+Function<T,R> 어떤 값을 하나 받아서 하나의 값을 리턴하는거다.
+( T를 받아서R을 받는다) 
+ 타입이 다를 수 있기 때문에, 두개의 타입이 정의되어 있따.
+
+Function<T, R>
+● T 타입을 받아서 R 타입을 리턴하는 함수 인터페이스
+○ R apply(T t)
+
+package org.example;
+
+import java.util.function.Function;
+
+public class Plus100 implements Function<Integer, Integer>{
+    //1번째 파라미터가 입력값의 타입, 2번재 파라미터가 출력값의 타입
+
+    @Override
+    public Integer apply(Integer integer) {
+        return integer + 10;
+    }
+}
+
+
+이렇게 함수형 인터페이스 만들어서 main에다가 객체 만들어 쓰면된다. 
+package org.example;
+
+public class Foo {
+    public static void main(String[] args) {
+
+     Plus100 plus100 = new Plus100();
+     plus100.apply(100);
+    }
+}
+
+
+
+● 함수 조합용 메소드 를 디폴트로 제공한다. 
+○ andThen
+○ compose
+
+BiFunction<T, U, R>
+● 두 개의 값(T, U)를 받아서 R 타입을 리턴하는 함수 인터페이스
+○ R apply(T t, U u)
+
+Consumer<T>
+● T 타입을 받아서 아무값도 리턴하지 않는 함수 인터페이스
+○ void Accept(T t)
+● 함수 조합용 메소드
+○ andThen
+
+Supplier<T>  입력값이 없다. 그냥 리턴하는 함수다. 
+● T 타입의 값을 제공하는 함수 인터페이스
+○ T get()
+
+Predicate<T> 어떠한 인자값을 하나 받아서, true/false를 리턴해준다. 
+● T 타입을 받아서 boolean을 리턴하는 함수 인터페이스
+○ boolean test(T t)
+● 함수 조합용 메소드
+○ And
+○ Or
+○ Negate
+
+UnaryOperator<T> 입력값과 출력값의 타입이 같은 경우
+● Function<T, R>의 특수한 형태로, 입력값 하나를 받아서 동일한 타입을 리턴하는 함수
+인터페이스
+
+BinaryOperator<T> 값 2개 받아서 하나 리턴 하는건데 binaryoperator는 타입이 다 같은 경우이다. 
+● BiFunction<T, U, R>의 특수한 형태로, 동일한 타입의 입렵값 두개를 받아 리턴하는 함수
+인터페이스
+
+예제 만들어봐야겠다. 
